@@ -1,0 +1,13 @@
+diff --git a/docs/metamorphose_context.txt b/docs/metamorphose_context.txt
+index 1a2b3c..4d5e6f 100644
+--- a/docs/metamorphose_context.txt
++++ b/docs/metamorphose_context.txt
+@@ -15,6 +15,7 @@
+ 2. HISTORIEN-TREUE: Kein Löschen, nur [+] [~] [-]
+ 3. TECHNIK: Quellen + Code-Snippets immer angeben
++4. PATCHES: Änderungen als .diff-Dateien bereitstellen (Git-Format)
+ [GIT]
+ REPO: https://github.com/magdanc/Metamorphose
+ [HISTORY]
+-v7.6 | 2025-08-09 | GIT-Konventionen
++v7.7 | 2025-08-09 | Patch-Regel hinzugefügt
