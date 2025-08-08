@@ -1,4 +1,4 @@
-#METAMORPHOSE v7.6 | 2025-08-09
+#METAMORPHOSE v7.7 | 2025-08-09
 #KONTEXTFÜHRUNG: WDR/DS + KI | UTC+2 | PROJEZUSTAND: AKTIV
 
 [PROJEKT]
@@ -71,6 +71,7 @@ MODS:
      ```
    - Quellenangaben:
      "SKR 1.4 Pinout (BTT-Dokument Rev.3.4 ✓)"
++5. PATCHES: Änderungen als .diff-Dateien bereitstellen (Git-Format)
 
 [GIT]
 REPOSITORY: https://github.com/magdanc/Metamorphose
@@ -97,6 +98,7 @@ v7.0 | 2025-08-08 | Vollständigkeitsgarantie
 v7.1 | 2025-08-09 | Aktuelle Konsolidierung
 v7.4 | 2025-08-09 | Finale Korrektur
 v7.5 | 2025-08-09 | man. Korrekturen
-v7.6 | 2025-08-09 | GIT-Konventionen
+-v7.6 | 2025-08-09 | GIT-Konventionen
++v7.7 | 2025-08-09 | Patch-Regel hinzugefügt
 
 #ENDE DER DATEI
