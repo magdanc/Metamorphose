@@ -1,1 +1,35 @@
-VPS
+Projektnotiz: VPS & WireGuard
+Kurzbeschreibung
+
+Aufsetzen und Betreiben eines eigenen VPS (Virtual Private Server) zur sicheren Kommunikation.
+Aktuelles Kernthema: Einrichtung von WireGuard-VPN für Zugriff auf das Firmennetzwerk und Remote-Verbindungen.
+
+Status
+
+VPS läuft, grundlegende Dienste aktiv.
+
+WireGuard ist eingerichtet, Keys für FritzBox vorhanden.
+
+Erste Tests (Ping von 10.10.0.3 → Server) durchgeführt.
+
+Offene Punkte: DNS-Domain (fritz.box) als Gegenstelle, Routing/Erreichbarkeit nur fürs Firmennetz konfigurieren.
+
+Performance bei langen Chatverläufen → Lösung durch Projektnotiz.
+
+Regeln / Arbeitsweise
+
+Ziel: Minimaler Konfigurationsaufwand, aber saubere Dokumentation.
+
+Immer zuerst Server-Seite (VPS) prüfen, dann Client (z. B. Laptop, FritzBox).
+
+Konfigurationsdateien (.conf) klar kommentieren, keine sensiblen Keys in Notizen!
+
+Test-Tools: ping, wg show, traceroute.
+
+Externe Referenzen
+
+GitHub Repo (für Konfigurationsbeispiele und Skripte): <Platzhalter-Link>
+
+VPS Provider Doku: <Platzhalter-Link>
+
+WireGuard Projektseite: https://www.wireguard.com/
