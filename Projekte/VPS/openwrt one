@@ -1,0 +1,210 @@
+OpenWrt One
+
+OpenWrt One is based on the MediaTek Filogic 820 SoC and has WiFi 6, dual-band, 3×3/2×2, 1x 2.5Gbit WAN, 1x 1Gbit LAN, 1GB DDR4 RAM, 256 MiB NAND, 16 MiB NOR (for recovery), M.2 SSD, USB-C Serial console and USB 2.0. Power Over Ethernet (POE): an IEEE 802.3af/at compliant device can power the device via the RJ-45 2.5 Gbps WAN connector.
+
+OpenWrt One
+Supported Versions
+
+Brand
+	Model
+	Supported Current Rel
+	OEM Device Homepage URL
+	FCCID
+	Forum search
+	
+OpenWrt
+	One
+	24.10.2
+	openwrt.org
+	
+	One
+	Edit
+Hardware Highlights
+
+Model
+	CPU
+	CPU MHz
+	CPU Cores_numcores
+	Flash MB
+	RAM MB
+	WLAN Hardware
+	Ethernet 1Gbit ports
+	Ethernet 2.5Gbit ports
+	USB ports
+	Detachable Antennas
+	LED count
+	Button count
+	JTAG
+	Power Supply
+One
+	MediaTek MT7981BA
+	1300
+	2
+	16, 256NAND
+	1024
+	MediaTek MT7981BA, MediaTek MT7976CN
+	1
+	1
+	1x 2.0
+	3
+	3
+	2
+	Yes
+	15V, 2A via USB Type-C, or optional 802.3af/at PoE
+
+Schematics and datasheets for the OpenWRT One can be found at https://one.openwrt.org/hardware/
+
+The OpenWrt One HowTo can be found at https://one.openwrt.org/hardware/OpenWrtOne-HowTo.pdf
+Installation
+
+Model
+	Version
+	Supported Current Rel
+	Firmware OpenWrt snapshot Install URL
+	Firmware OpenWrt snapshot Upgrade URL
+	Firmware OEM Stock URL
+One
+	
+	24.10.2
+	Factory snapshot image
+	Factory sysupgrade image
+	OEM Firmware
+What to Expect When You First Power Up Your OpenWrt One
+
+Each Openwrt One comes flashed with the most current OpenWrt Release Firmware available based on the current manufacturing batch date. LuCI GUI will be installed, and the device is ready to run Out Of the Box using standard default settings.
+
+    before powering up the device make sure the NAND/NOR switch is set to NAND
+    connect to the 1G port of the device via Ethernet through 192.168.1.1
+    power on the device and wait for the green led to go solid indicating the device has booted.
+    point your browser to 192.168.1.1 to use the LuCI GUI or from a terminal session via ssh root@192.168.1.1
+
+Follow the Quick Start Guide to configure the unit for your use.
+Upgrading the Firmware
+Upgrading the firmware from USB
+
+    prepare a FAT32 formatted USB drive that contains the sysupgrade.itb file from either the SNAPSHOT or Release repositories
+    remove power
+    insert the USB stick in the Type A USB Port.
+    make sure NAND boot switch is selected.
+    press and hold the button on the back side labeled Reset
+    power up the device. Release the Reset button as soon as all LEDS turn off.
+    wait for the middle LED to go green.
+
+The device will boot from NAND and the bootloader will reflash the kernel and root filesystem on the NAND.
+
+Note: You may have to try other USB drives formatted to FAT32. There are observations that some USB drives have incompatibility issues. Try using a MBR partition table. If you get a Bad device specification usb 0 error from u-boot, increasing the delay may help:
+U-Boot Shell
+
+OpenWrt One> setenv usb_pgood_delay 4000
+OpenWrt One> usb reset
+resetting USB...
+scanning usb for storage devices... 1 Storage Device(s) found
+
+Upgrading using other options (ASU, Owut, Generic Sysupgrade, or Firmware Selector)
+
+Follow the relevent wiki articles:
+
+    https://openwrt.org/docs/guide-user/installation/sysupgrade.owut
+    https://openwrt.org/docs/guide-user/installation/attended.sysupgrade?s[]=asu#upgrade_using_attended_sysupgrade
+    https://openwrt.org/docs/guide-user/installation/generic.sysupgrade
+    https://firmware-selector.openwrt.org select/customize your firmware Release version or current SNAPSHOT and select REQUEST BUILD
+
+Upgrading from Booting the initramfs NAND Recovery Mode
+
+This is similar to the Upgrading the firmware from USB but differs such that the front button is held instead (and no USB stick is needed to be prepared).
+
+    remove power
+    make sure NAND boot is selected
+    press and hold the button on the Front panel.
+    power up the device. Release the Front panel button as soon as all Front Panel LEDS turn off.
+    wait for the middle LED to go green.
+
+The device will boot a recovery initramfs image. You can use any of the Upgrading using other options detailed above.
+Recovery
+
+For installation the factory.ubi, sysupgrade and raw kernel image are offered. In addition, the uboot bl31-uboot.fip FIP 1), factory.bin and preloader.bin are offered in NAND and (stripped down recovery) NOR variants for flashing the respective memories for recovery purposes (see relevant section).
+Boot into NOR/full recovery mode: Flash NAND from USB
+
+For when the unit does not boot from NAND anymore, there is a failsafe recovery method to boot from NOR. This can be used even if the ATF 2) or bootloader on the NAND are broken. The process is similar to the the NAND recovery boot, except for the NAND/NOR switch being on NOR (and the USB flash drive needing to be prepared):
+
+    prepare a FAT32 formatted USB drive that contains the NAND preloader and the factory image:
+        openwrt-mediatek-filogic-openwrt_one-snand-preloader.bin
+        openwrt-mediatek-filogic-openwrt_one-factory.ubi
+    remove power
+    insert the USB drive
+    make sure NOR boot is selected
+    press and hold the button on the front side
+    power up the device. Release the Front panel button as soon as all Front Panel LEDS turn off.
+    wait for the LED to go green
+
+The NOR recovery system will then factory re-flash the entire NAND memory.
+Boot into UART recovery: Flash NOR from TFTP
+
+The NOR recovery memory can be re-flashed, too. This is a two step process:
+
+    UART boot: Copy DDR4 initialization and NOR bootloader images to RAM over the UART/serial console connection using mtk_uartboot, and boot from RAM.
+    NOR flash: Then use the boot menu recovery to re-flash images to NOR from a TFTP server.
+
+For the second step, the SPI NOR WP jumper must be in place (factory default position) and a TFTP server must be running and connected to the One's LAN port, to serve the new images.
+Preparation
+
+To copy image over UART, the mtk_uartboot binary needs used. It can be downloaded from the assets section of the latest Releases. Select the appropriate archive for your operating system and unpack the mtk_uartboot binary.
+
+Also download the DDR4 initialization file and NOR BL31/uboot image for later transfer & boot via UART:
+
+    mt7981-ram-ddr4-bl2.bin
+    openwrt-mediatek-filogic-openwrt_one-nor-bl31-uboot.fip
+
+For the second step, prepare a TFTP server to listen on 192.168.11.23 (the One will use an IP of 192.168.11.11). The server should be connected to the LAN port of the device and serve NOR images of BL31/uboot, the preloader, and the factory image to be flashed:
+
+    openwrt-mediatek-filogic-openwrt_one-nor-bl31-uboot.fip
+    openwrt-mediatek-filogic-openwrt_one-nor-preloader.bin
+    openwrt-mediatek-filogic-openwrt_one-nor-factory.bin
+
+UART boot
+
+The following command can be used to use the downloaded mtk_uartboot to copy the boot files and open a serial console connection using GNU Screen directly thereafter, s.t., the boot menu recovery can be accessed. From there, the flashing over TFTP can be initiated. With the router still powered off run on your computer whilst connected through USB-C:
+
+path/to/mtk_uartboot --aarch64 \
+                     --brom-load-baudrate 115200 \
+                     --bl2-load-baudrate 115200 \
+                     -s /dev/ttyACM0 \
+                     -p path/to/mt7981-ram-ddr4-bl2.bin \
+                     -f path/to/openwrt-mediatek-filogic-openwrt_one-nor-bl31-uboot.fip \
+    && screen /dev/ttyACM0 115200
+
+Note: Replace the path/to with the correct paths to the downloaded files and /dev/ttyACM0 with the serial console device of the connection on your host system.
+
+You will need to elevate permissions to gain access to dialout Group for serial devices like /dev/ttyS* and /dev/ttyUSB* and uucp Group for UUCP-related tasks. Add your_username to both the dialout and uucp Groups to your linux host like this:
+
+sudo usermod -aG dialout your_username
+sudo usermod -aG uucp your_username
+
+Remember to log out and back in to update your permissions.
+
+With mtk_uarboot starting you will see the following output:
+
+mtk_uartboot - 0.1.1
+Using serial port: /dev/ttyACM0
+Handshake...
+
+Now power on the router and mtk_uartboot will continue with hw code: 0x7981 and further logs as it uploads the BL2 and FIP (Firmware Image Package). After the upload succeeded, GNU Screen should start up and you should see the boot menu.
+NOR update from TFTP Server
+
+Make sure to interrupt the boot process by pressing down arrow when the boot menu appears. Within the boot menu, choose 7. Lock NOR. (Remove jumper afterwards).
+
+Note: Successful NOR flashing is slower than when the flashing isn't actually happening.
+
+Once the firmware has been re-flashed the router can be rebooted (and the jumper removed).
+Enclosure
+
+Dimensions: 148 x 100.5 mm - compatible with Banana Pi BPI-R4 case design.
+
+OpenWrt One Enclosure
+Notes
+
+    See BananaPi OpenWrt One page for additional information.
+    NOR is used for recovery. In normal operations the router should be booted from NAND.
+    OpenWrt One official distributors on SFC:
+        https://sfconservancy.org/activities/openwrt-one.html
+
