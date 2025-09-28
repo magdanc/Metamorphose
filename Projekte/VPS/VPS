@@ -26,8 +26,17 @@ Konfigurationsdateien (.conf) klar kommentieren, keine sensiblen Keys in Notizen
 
 Test-Tools: ping, wg show, traceroute.
 
-Externe Referenzen
+„Fileserver für Windows (Samba über WireGuard)“
+Status: In Arbeit
+Abhängigkeiten: WireGuard muss laufen, Routing ins Firmennetz vorhanden.
+Nächste To-Dos:
+Samba-Installation + Testfreigabe
+Firewall anpassen (nur wg0)
+Verbindungstest von Windows-Client
+Benutzer/Passwort-Policy festlegen
 
+
+Externe Referenzen
 GitHub Repo (für Konfigurationsbeispiele und Skripte): <Platzhalter-Link>
 
 VPS Provider Doku: <Platzhalter-Link>
