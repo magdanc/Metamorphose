@@ -1,0 +1,8 @@
+GitHub-Verbindungstest
+Datum: 2026-10-14
+Repository: magdanc/Metamorphose
+
+Diese Textdatei wurde fuer einen vom Repository-Inhaber beauftragten
+Schreibtest ueber die GitHub-Integration erstellt.
+Sie liegt ausschliesslich auf dem Testbranch codex/github-write-test-2026-10-14.
+Der Test verwendet die GitHub-API, keinen lokalen git-push.
