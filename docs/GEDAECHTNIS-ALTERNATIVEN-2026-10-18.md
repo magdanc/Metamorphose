@@ -51,3 +51,13 @@ Bewertung: korrekte Quellen-/Commitbezüge, Wiederfinden ursprünglicher Gründe
 **Offene Forschungs- und Architekturidee.** Keine Migration, Installation, laufender Agent oder Entscheidung für einen Anbieter. Nächster Schritt nur auf ausdrücklichen Wunsch Wolfgangs.
 
 Siehe [ICH](../ICH.md) für die verbindliche Kontinuitätsregel und [Leitwarte](https://github.com/magdanc/Metamorphose-Leitwarte) für projektübergreifende Entscheidungen.
+
+## Langfristiges Leitbild – „Alles und nichts“ (18.10.2026)
+
+Wolfgang beschreibt die Suche nach besseren Gedächtnis- und Reflexionsverfahren als **fortlaufende Aufgabe**. Neue Ansätze sollen immer wieder geprüft werden, ohne dass jede interessante Möglichkeit sofort ein Entwicklungsprojekt auslöst.
+
+Seine Formulierung **„Core mit der Singularität – alles und nichts“** bleibt bewusst als offenes Leitbild erhalten, nicht als bereits spezifizierte Architektur oder behauptete technische Singularität.
+
+Mögliche Interpretation zur gemeinsamen Prüfung: **„Alles“** bedeutet, bei Bedarf auf unterschiedlichste Erfahrungen, Werkzeuge und Fähigkeiten zugreifen zu können; **„nichts“** bedeutet, dass der Core nicht sämtliche Funktionen selbst enthalten oder dauerhaft laden muss. Das ist eine *Deutung von Metamorphose*, keine bestätigte Definition Wolfgangs.
+
+Konsequenz für spätere Untersuchungen: neue Ansätze zur Kontinuität, Erinnerung, quellengebundenen Reflexion und modularen Modellnutzung gelegentlich gegen die bestehende Lösung prüfen; dabei Komplexität, Nachweisbarkeit und tatsächlichen Nutzen höher gewichten als Funktionsfülle. Keine automatische Hintergrundüberwachung und keine ungefragte Implementierung.
